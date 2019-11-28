@@ -5,7 +5,7 @@ import Input from './Input';
 
 const MainContainer = styled.div`
 display:flex;
-justify-content:center;
+justify-content:space-around;
 align-items:center;
 flex-direction:column;
 background-color: #282c34;
@@ -51,7 +51,7 @@ export default function Main() {
         <MainContainer>
             <Top>
                 <MdAlarmOn color="white" size="1.5em"/>
-                <H1>Wake up your app below!</H1>
+                <H1>WAKE UP YOUR API BELOW!</H1>
             </Top>
             <Middle>
                 <Input/>
