@@ -5,7 +5,7 @@ import Input from './Input';
 
 const MainContainer = styled.div`
 display:flex;
-justify-content:center;
+justify-content:space-around;
 align-items:center;
 flex-direction:column;
 background-color: #282c34;
