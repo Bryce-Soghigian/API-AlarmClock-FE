@@ -51,7 +51,7 @@ export default function Main() {
         <MainContainer>
             <Top>
                 <MdAlarmOn color="white" size="1.5em"/>
-                <H1>Wake up your app below!</H1>
+                <H1>WAKE UP YOUR API BELOW!</H1>
             </Top>
             <Middle>
                 <Input/>
