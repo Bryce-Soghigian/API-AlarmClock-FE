@@ -53,7 +53,7 @@ export default function Main() {
     const [arr,setArr] = useState()
     const PingOnInterval = () => {
         for(let i = 0; i< arr.length;i++){
-            axios.get(arr[i]["api-url"])
+            axios.get(arr[i]["link"])
             .then((res) => {
                 console.log(arr[i])
                 console.log(res.data)
@@ -78,7 +78,7 @@ export default function Main() {
 if(arr !== undefined){
     setInterval(function() {
         PingOnInterval()
-    },300000)
+    },1000000)
 
 }
 

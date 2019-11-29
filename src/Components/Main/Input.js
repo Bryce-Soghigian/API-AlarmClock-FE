@@ -1,6 +1,7 @@
 import React,{useState,useEffect} from 'react'
 import styled from 'styled-components';
 import axios from 'axios'
+import Swal from 'sweetalert2'
 
 const InputDiv = styled.div`
 
@@ -29,6 +30,11 @@ margin:.5em;
 width:17.5vh;
 border: 2px solid black;
 color:#272B34;
+
+&:focus {
+    outline-color:white;
+}
+
 :hover{
 transition:0.5s;
 background-color:#272B34;
@@ -40,28 +46,31 @@ border: 2px solid white;
 `
 
 export default function Input() {
-    const [input,setInput]= useState()
+    const [input,setInput]= useState("")
     const HandleSubmit = (e) => {
+        e.preventDefault();
+
         console.log(input)
-        axios.post('https://api-alarm-clock.herokuapp.com/url/urls',{
-            'api-url':input
-        })
+        let values = {"link":input}
+        axios.post('https://api-alarm-clock.herokuapp.com/url/urls',values)
         .then((res) => {
-            console.log(input)
-            // document.getElementById("api-url").reset();
+            console.log(res.data)
+            Swal.fire({
+              icon: 'success',
+              title: 'Beep',
+              text: 'Our api will keep your api awake from 8am Central to 2am Central',
+              footer: 'Thanks for choosing Alarm Clock'
+            })
         }).catch((err) => {
             console.error(err)
         })
     }
-    const HandleChange = (e) => {
-        console.log(e.target.value)
-        return(setInput(e.target.value.toString()))
-    }
+
     return (
         <InputDiv>
         <InputContainer>
-            <InputField placeholder="TYPE API URL HERE" onChange={HandleChange} id="api-url"/>
-            <Submit onClick={HandleSubmit}>SUBMIT</Submit>
+            <InputField placeholder="TYPE API URL HERE" onChange={e => setInput(e.target.value)} type="text" id="api-url"/>
+            <Submit onClick={HandleSubmit} type="submit">SUBMIT</Submit>
         </InputContainer>
         </InputDiv>
     )
