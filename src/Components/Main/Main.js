@@ -78,7 +78,7 @@ export default function Main() {
 if(arr !== undefined){
     setInterval(function() {
         PingOnInterval()
-    },1000000)
+    },180000)
 
 }
 
