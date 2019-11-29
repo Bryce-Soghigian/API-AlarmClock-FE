@@ -1,6 +1,7 @@
 import React,{useState,useEffect} from 'react'
 import styled from 'styled-components';
 import axios from 'axios'
+
 const InputDiv = styled.div`
 
 
@@ -16,6 +17,8 @@ margin:5em;
 const InputField = styled.input`
 width:35vw;
 height:5vh;
+color: #282c34;
+border: 4px solid black;
 &:focus {
     outline-color:white;
 }
@@ -40,22 +43,25 @@ export default function Input() {
     const [input,setInput]= useState()
     const HandleSubmit = (e) => {
         console.log(input)
-        axios.post('url',input)
+        axios.post('https://api-alarm-clock.herokuapp.com/url/urls',{
+            'api-url':input
+        })
         .then((res) => {
-            document.getElementById("api-url").reset();
+            console.log(input)
+            // document.getElementById("api-url").reset();
         }).catch((err) => {
             console.error(err)
         })
     }
     const HandleChange = (e) => {
         console.log(e.target.value)
-        return(setInput(e.target.value))
+        return(setInput(e.target.value.toString()))
     }
     return (
         <InputDiv>
         <InputContainer>
             <InputField placeholder="TYPE API URL HERE" onChange={HandleChange} id="api-url"/>
-            <Submit onClick={HandleSubmit}>Submit</Submit>
+            <Submit onClick={HandleSubmit}>SUBMIT</Submit>
         </InputContainer>
         </InputDiv>
     )

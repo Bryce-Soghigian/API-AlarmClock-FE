@@ -1,7 +1,8 @@
-import React from 'react'
+import React,{useState,useEffect} from 'react'
 import { MdAlarmOn} from "react-icons/md";
 import styled from 'styled-components'
 import Input from './Input';
+import axios from 'axios';
 
 const MainContainer = styled.div`
 display:flex;
@@ -11,6 +12,7 @@ flex-direction:column;
 background-color: #282c34;
 width:100vw;
 height:100vh;
+
 `
 
 const  H1 = styled.h1`
@@ -47,10 +49,43 @@ width:100vw;
 
 `
 export default function Main() {
+    
+    const [arr,setArr] = useState()
+    const PingOnInterval = () => {
+        for(let i = 0; i< arr.length;i++){
+            axios.get(arr[i]["api-url"])
+            .then((res) => {
+                console.log(arr[i])
+                console.log(res.data)
+            }).catch((err) => {
+                console.error(err)
+            })
+        }
+
+
+    }
+
+    useEffect(() => {
+        axios.get("https://api-alarm-clock.herokuapp.com/url/urls")
+        .then((res) => {
+            setArr(res.data)
+            
+        }).catch((err) => {
+            console.error(err)
+        })
+    }, [])
+
+if(arr !== undefined){
+    setInterval(function() {
+        PingOnInterval()
+    },300000)
+
+}
+
     return (
         <MainContainer>
             <Top>
-                <MdAlarmOn color="white" size="1.5em"/>
+                <MdAlarmOn color="white" size="5em"/>
                 <H1>WAKE UP YOUR API BELOW!</H1>
             </Top>
             <Middle>
