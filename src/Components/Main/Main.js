@@ -50,37 +50,10 @@ width:100vw;
 `
 export default function Main() {
     
-    const [arr,setArr] = useState()
-    const PingOnInterval = () => {
-        for(let i = 0; i< arr.length;i++){
-            axios.get(arr[i]["link"])
-            .then((res) => {
-                console.log(arr[i])
-                console.log(res.data)
-            }).catch((err) => {
-                console.error(err)
-            })
-        }
 
 
-    }
 
-    useEffect(() => {
-        axios.get("https://api-alarm-clock.herokuapp.com/url/urls")
-        .then((res) => {
-            setArr(res.data)
-            
-        }).catch((err) => {
-            console.error(err)
-        })
-    }, [])
 
-if(arr !== undefined){
-    setInterval(function() {
-        PingOnInterval()
-    },18000)
-
-}
 
     return (
         <MainContainer>
